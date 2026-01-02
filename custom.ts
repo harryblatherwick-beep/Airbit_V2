@@ -17,37 +17,6 @@ enum MyEnum {
 //% weight=100 color=#0fbc11 icon=""
 namespace airbit {
 
-    //% blockID=airbit_start_bluetooth
-//% block="Start Bluetooth UART"
-//% group='Control'
-export function startBluetooth() {
-    bluetooth.startUartService()
-}
-
-//% blockID=airbit_bluetooth_handler
-//% block="Bluetooth UART Handler"
-//% group='Control'
-export function bluetoothHandler() {
-    bluetooth.onUartDataReceived(serial.delimiters(Delimiters.NewLine), function () {
-        uartReceivedTime = input.runningTime()
-        let msg = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
-
-        if (msg == "A") arm = 1
-        if (msg == "DISARM") arm = 0
-        if (msg == "T") throttle = Math.constrain(parseInt(msg), 0, 100)
-        if (msg == "R") roll = expo(parseInt(msg)) / 3
-        if (msg == "P") pitch = expo(parseInt(msg)) / -3
-        if (msg == "Y") yaw += parseInt(msg) * 0.1
-        if (msg == "B") throttle = 0
-        if (msg == "C") throttle = 50
-        if (msg == "D") throttle = 100
-        if (msg == "1") airbit.MotorSpeed(255, 0, 0, 0)
-        if (msg == "2") airbit.MotorSpeed(0, 255, 0, 0)
-        if (msg == "3") airbit.MotorSpeed(0, 0, 255, 0)
-        if (msg == "4") airbit.MotorSpeed(0, 0, 0, 255)
-    })
-}
-
 
     /**
     * Draw a vertical bar with gradients for prescicion
@@ -196,7 +165,37 @@ export function bluetoothHandler() {
 
 
 
+//% blockID=airbit_start_bluetooth
+//% block="Start Bluetooth UART"
+//% group='Control'
+export function startBluetooth() {
+    bluetooth.startUartService()
+}
 
+//% blockID=airbit_bluetooth_handler
+//% block="Bluetooth UART Handler"
+//% group='Control'
+export function bluetoothHandler() {
+    bluetooth.onUartDataReceived(serial.delimiters(Delimiters.NewLine), function () {
+        uartReceivedTime = input.runningTime()
+        let msg = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
+
+        if (msg == "A") arm = 1
+        if (msg == "DISARM") arm = 0
+        if (msg == "T") throttle = Math.constrain(parseInt(msg), 0, 100)
+        if (msg == "R") roll = expo(parseInt(msg)) / 3
+        if (msg == "P") pitch = expo(parseInt(msg)) / -3
+        if (msg == "Y") yaw += parseInt(msg) * 0.1
+        if (msg == "B") throttle = 0
+        if (msg == "C") throttle = 50
+        if (msg == "D") throttle = 100
+        if (msg == "1") airbit.MotorSpeed(255, 0, 0, 0)
+        if (msg == "2") airbit.MotorSpeed(0, 255, 0, 0)
+        if (msg == "3") airbit.MotorSpeed(0, 0, 255, 0)
+        if (msg == "4") airbit.MotorSpeed(0, 0, 0, 255)
+    })
+}
+    }
 
     /*
         export function PCA_ReadMode2() {
