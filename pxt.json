@@ -3,7 +3,7 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*",
+        "bluetooth": "*",
         "microphone": "*",
         "microbit-pxt-i2cpins": "github:bsiever/microbit-pxt-i2cpins#v0.0.6"
     },
