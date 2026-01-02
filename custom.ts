@@ -227,9 +227,6 @@ namespace airbit {
     }
 }
 
-
-    }
-
     /*
         export function PCA_ReadMode2() {
             pins.i2cWriteNumber(
@@ -798,10 +795,4 @@ namespace airbit {
 
     let radioGroup = 7
     let motorSpeed = -1
-
-
-
-
-
-}
 
